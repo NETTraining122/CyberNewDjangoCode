@@ -1,0 +1,113 @@
+//Django Installation & Setup 
+//Create Virtual Environment
+//Create Hello World
+//Create Project & App
+//Register App in the settings.py
+//Create views & urls in the app
+//Connect project url with app url
+//Create multiple views & urls
+//Home/AboutUs/Client/Services/Contact-Us/etc.
+
+1.Install Python With Latest Version
+
+python.org
+vs code
+
+2.Create Empty project on desktop  and Set Virtual Environment
+
+python -m venv env
+
+3.Activate this virtual envir..
+
+.\env\Scripts\activate
+
+4.Install Django By this command
+
+python -m pip install Django
+
+----------------------------------------------------------------
+//Create a project & app in django
+
+django-admin startproject project_name
+cd project_name
+
+//Create a new Django app
+
+python manage.py startapp app_name
+
+//Run django app
+python manage.py runserver
+
+
+
+-->manage.py is a command-line program that you use to interact with the project like starting a development server and making changes to the database.
+The django_project is a Python package that consists of the following files:
+
+-->__init__.py – is an empty file indicating that the django_project directory is a package.
+-->settings.py – contains the project settings such as installed applications, database connections, and template directories.
+-->urls.py – stores a list of routes that map URLs to views.
+-->wsgi.py – contains the configurations that run the project as a web server gateway interface (WSGI) application with WSGI-compatible web servers.
+-->asgi.py – contains the configurations that run the project as an asynchronous web server gateway interface (AWSGI) application with AWSGI-compatible web servers.
+
+//Register the app in project 
+
+->Project-->Settings--
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'cyberapp',
+
+//Settings of Views & Urls with helloworld
+
+
+----------------myapp-->Views.py---------------
+from django.shortcuts import render
+from django.http import HttpResponse
+# Create your views here.
+
+def home(request):
+    return HttpResponse('<h1>Welcome home</h1>')
+
+def about(request):
+    return HttpResponse('<h2>About Us</h2>')
+
+def client(request):
+    return render(request,'myapp/client.html')
+
+-------------myapp-->urls.py
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('home/', views.home, name='home'),
+    path('about/',views.about,name='about'),
+     path('client/',views.client,name='client'),
+   
+    
+]
+-------------project/urls.py
+from django.contrib import admin
+from django.urls import path,include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('home/',include('myapp.urls')),
+    path('',include('myapp.urls')),
+]
+
+
+
+
+
+
+
+
+
+
