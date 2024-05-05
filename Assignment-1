@@ -1,0 +1,15 @@
+##Create following pages in django where name & functionalities 
+are here .
+
+Task-1
+Create Employee.html templates where it is contains the employee information like
+EmpName,EmpAge,EmpCity,EmpMobile 
+you need to create one function for employee & pass the data from 
+view to html page in tabular format
+
+Task-2
+
+Create Services.html page where it is contains the services information 
+like 
+service name ,service's client etc.
+pass this from view to html page.
