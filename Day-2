@@ -1,0 +1,61 @@
+//Render method in Django 
+//Create templates separtelly in the app
+//Register this templates in the settings.py
+//Create Home/About/Services & Client html page & render them
+//
+
+1.Create different templates in app folder
+myapp-templates-myapp then create multiple pages like in html
+/home.html
+/about.html
+/client.html
+<h1>Home page</h1>
+....
+
+2.Register this templates in settings.py
+'DIRS': [BASE_DIR / 'templates'],
+3.myapp/views.py
+
+from django.shortcuts import render
+from django.http import HttpResponse
+# Create your views here.
+
+def home(request):
+    return HttpResponse('<h1>Welcome home</h1>')
+
+def about(request):
+    return HttpResponse('<h2>About Us</h2>')
+
+def client(request):
+    return render(request,'myapp/client.html')
+
+--
+myapp/urls.py
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('home/', views.home, name='home'),
+    path('about/',views.about,name='about'),
+    path('client/',views.client,name='client'),
+   
+    
+]
+
+4.project/urls.py
+from django.contrib import admin
+from django.urls import path,include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('home/',include('myapp.urls')),
+    path('',include('myapp.urls')),
+]
+
+
+
+
+
+
