@@ -87,3 +87,76 @@
     </div>
 {% endblock %}
 
+
+//grid layout
+
+{% extends 'base.html' %}
+{% block title %}
+  hiiiiiiiii
+{% endblock %}
+{% block content %}
+{% load static %}
+    <div class="jumbotron">
+        <h1>Welcome to my site!</h1>
+        <p>This is some text that explains what my site is all about.</p>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <p>Play a short fun video:</p>
+                <video width="320" height="240" controls>
+                  <source src="{% static '/media/samplevideo.mp4' %}" type="video/mp4">
+                  Your browser does not support the video element.
+                </video>
+            </div>
+            <div class="col-md-4">
+
+                <p>Play a short fun video:</p>
+                <video width="320" height="240" controls>
+                  <source src="{% static '/media/samplevideo.mp4' %}" type="video/mp4">
+                  Your browser does not support the video element.
+                </video>
+            </div>
+
+            <div class="col-md-4">
+
+                <p>Play a short fun video:</p>
+                <video width="320" height="240" controls>
+                  <source src="{% static '/media/samplevideo.mp4' %}" type="video/mp4">
+                  Your browser does not support the video element.
+                </video>
+            </div>
+            <div class="row">
+
+                <div class="col-md-4">
+    
+                    <p>Play a short fun video:</p>
+                    <video width="320" height="240" controls>
+                      <source src="{% static '/media/samplevideo.mp4' %}" type="video/mp4">
+                      Your browser does not support the video element.
+                    </video>
+                </div>
+                <div class="col-md-4">
+    
+                    <p>Play a short fun video:</p>
+                    <video width="320" height="240" controls>
+                      <source src="{% static '/media/samplevideo.mp4' %}" type="video/mp4">
+                      Your browser does not support the video element.
+                    </video>
+                </div>
+    
+                <div class="col-md-4">
+    
+                    <p>Play a short fun video:</p>
+                    <video width="320" height="240" controls>
+                      <source src="{% static '/media/samplevideo.mp4' %}" type="video/mp4">
+                      Your browser does not support the video element.
+                    </video>
+                </div>
+    
+
+        </div>
+
+    </div>
+
+{% endblock %}
