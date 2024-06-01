@@ -29,38 +29,44 @@ Step-6 add one app/forms.py on django app.
 
 Step-7 add one function on app/views.py
 
+{% block title %}
+All Students
+{% endblock title %}
+<style>
+    th,td{
+        border:1px black solid;
+    }
+</style>
 {% block content %}
-<h1>All students</h1>
-    {% block content %}
-        <div class="container">
-        <body>
-         <h2>Student Page</h2>
-        {% if form %}
-        <h3>{{form}}</h3>
-        <table>
-            <tr>
-                <th>StudentName</th>
-                <th>StudentAge</th>
-                <th>StudentPhone</th>
-                <th>StudentAddress</th>
-                <th>StudentEmail</th>
-            </tr>
-            {% for i in form %}
-            <tr>
-                <td>{{ i.StudentName }}</td>
-                  <td>{{ i.StudentAge }}</td>
-                 <td>{{ i.StudentPhone }}</td>
-                 <td>{{ i.StudentAddress }}</td>
-                 <td>{{ i.StudentEmail }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% else %}
-        <h2>No data</h2>
-        {% endif %}
-        </body>
+<div class="container">
+            <body>
+                <h1>Student page</h1>
+                {% if form %}
+                <h1>{{form}}</h1>
+                <table>
+                    <tr>
+                        <th>StudentName</th>
+                        <th>StudentAge</th>
+                        <th>StudentPhone</th>
+                        <th>StudentAddress</th>
+                        <th>StudentEmail</th>
+                    </tr>
+                    {% for st in form %}
+                    <tr>
+                        <td>{{st.StudentName}}</td>
+                        <td>{{st.StudentAge}}</td>
+                        <td>{{st.StudentPhone}}</td>
+                    <td>{{st.StudentAddress}}</td>
+                    <td>{{st.StudentEmail}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+            <h1>No data</h1>
+            {% endif %}
+            </body>
         </div>
-{% endblock %}
+
 {% endblock content %}
 
  
