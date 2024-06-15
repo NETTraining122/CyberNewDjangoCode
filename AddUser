@@ -1,0 +1,26 @@
+//Views.py
+
+from django.shortcuts import render,redirect
+from .models import User
+from .forms import UserForm
+
+def home(request):
+    return render(request,'home.html')
+
+def AllUsers(request):
+    form=User.objects.all()
+    context={'form':form}
+    return render(request,'Alluser.html',context)
+
+def AddUser(request):
+    form = UserForm()
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('AllUsers')
+    template_name = 'AddUser.html'
+    context = {'form': form}
+    return render(request, template_name, context)
+
+//2.
