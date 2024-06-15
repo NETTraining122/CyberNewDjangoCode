@@ -23,4 +23,78 @@ def AddUser(request):
     context = {'form': form}
     return render(request, template_name, context)
 
-//2.
+//2.AddUser.html
+
+<html>
+  <head>
+    <title>Add User</title>
+  </head>
+  <body>
+    <h1>Add User</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Save">
+    </form>
+  </body>
+</html>
+
+//3.AllUsers.html
+
+{% block title %}
+All Users
+{% endblock title %}
+<style>
+    th,td{
+        border:1px black solid;
+    }
+</style>
+{% block content %}
+<div class="container">
+            <body>
+            {% if form %}
+                <h1>{{ form }}</h1>
+                <h1>User page</h1>
+                <table>
+                    <tr>
+                        <th>UserName</th>
+                        <th>Password</th>
+                        <th>Age</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Address</th>
+                         <th>Pin</th>
+                         <th>City</th>
+                    </tr>
+                    {% for st in form %}
+                    <tr>
+                        <td>{{st.userName}}</td>
+                        <td>{{st.password}}</td>
+                        <td>{{st.age}}</td>
+                         <td>{{st.email}}</td>
+                         <td>{{st.mobile}}</td>
+                        <td>{{st.address}}</td>
+                        <td>{{st.pin}}</td>
+                        <td>{{st.city}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+            <h1>No data</h1>
+            {% endif %}
+            </body>
+        </div>
+
+
+{% endblock content %}
+
+4.//Ursl.py
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('home/', views.home, name='home'),
+    path('AllUsers/', views.AllUsers, name='AllUsers'),
+    path('AddUser/', views.AddUser, name='AddUser'),
+]
