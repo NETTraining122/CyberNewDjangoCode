@@ -98,4 +98,63 @@ SyntaxError: invalid syntax
 >>> o1.delete()                   
 (1, {'myapp.User': 1})
 >>>
+--------------------------------------------------------------------------
+//python manage.py shell
+from myapp.models import User
+User.objects.all()
+User.objects.all[0].userName
+User.objects.all()[0].userName
+User.objects.all()[1].userName 
+User.objects.all()[2].age      
+
+//Filter
+>>> User.objects.filter(city='Pune')
+
+>>> User.objects.filter(city='Mumbai')
+<QuerySet []>
+>>> User.objects.filter(userName='vivek13' and password='vivek@13')
+  File "<console>", line 1
+    User.objects.filter(userName='vivek13' and password='vivek@13')
+                                                       ^
+SyntaxError: invalid syntax
+>>> User.objects.filter(userName='vivek13')                         
+<QuerySet []>
+>>> User.objects.filter(userName='Vivek13') 
+<QuerySet []>
+>>> User.objects.filter(userName='Vivek2')  
+<QuerySet [<User: User object (2)>]>
+>>> User.objects.filter(userName='Vivek2' and password='vivek@12')
+  File "<console>", line 1
+    User.objects.filter(userName='Vivek2' and password='vivek@12')
+                                                      ^
+SyntaxError: invalid syntax
+>>> User.objects.filter(age='22')                                  
+<QuerySet [<User: User object (1)>, <User: User object (2)>, <User: User object (3)>, <User: User object (4)>]>     
+>>> User.objects.filter(userName='Vivek2' and age='22')
+  File "<console>", line 1
+    User.objects.filter(userName='Vivek2' and age='22')
+                                                 ^
+SyntaxError: invalid syntax
+>>> User.objects.filter(userName='Vivek2' &&  age='22') 
+  File "<console>", line 1
+    User.objects.filter(userName='Vivek2' &&  age='22')
+                                           ^
+SyntaxError: invalid syntax
+>>> obj1=User(userName='Anu123',password='anu@123',age=12,email='anu@gmail.com',mobile=888666666,address='pune',pin=1111,city='mumbai')
+>>> obj1.save() 
+>>> User.objects.all()  
+<QuerySet [<User: User object (1)>, <User: User object (2)>, <User: User object (3)>, <User: User object (4)>, <User: User object (5)>, <User: User object (6)>]>
+>>> User.objects.get(userName='Vivek2')
+<User: User object (2)>
+>>> o1=User.objects.get(userName='Vivek2')
+>>> o1.userName='Vivek33'
+>>> o1.save()
+>>> User.objects.all()[1].userName
+'Vivek33'
+>>> o1.delete()                   
+(1, {'myapp.User': 1})
+>>>
+
+
+
 
