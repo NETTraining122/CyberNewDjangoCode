@@ -113,3 +113,10 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 
 class TokenRefreshView(TokenRefreshView):
     pass
+7.//post  --http://127.0.0.1:8000/api/register/
+
+{
+    "username":"cyber123",
+    "email":"cyber@gmail.com",
+    "password":"cyber@123"
+}
