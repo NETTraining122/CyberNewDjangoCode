@@ -61,4 +61,24 @@ urlpatterns = [
     # path('users/<int:pk>/update/', putUser, name='user-update'), # Handles PUT requests
     # path('users/<int:pk>/delete/', deleteUser, name='user-delete'), # Handles DELETE requests
 ]
+#Seralizer
 
+from rest_framework import serializers
+from .models import User
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+        
+    def validate(self, data):
+        name = data.get('name')
+        if User.objects.filter(name=name).exists():
+            raise serializers.ValidationError("this name already exists.")
+        return data
+        
+    def validate(self, data):
+        city = data.get('city')
+        if User.objects.filter(city=city).exists():
+            raise serializers.ValidationError("city already exists.")
+        return data
