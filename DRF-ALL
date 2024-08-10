@@ -47,3 +47,18 @@ def getUser(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+##urls.py
+
+# urls.py
+
+from django.urls import path
+from .views import getUser, getUserDetail
+
+urlpatterns = [
+    path('users/', getUser, name='user-list'),           # Handles GET and POST requests
+    path('users/<int:pk>/', getUserDetail, name='user-detail'), # Handles GET request for a specific user
+    # path('users/<int:pk>/update/', putUser, name='user-update'), # Handles PUT requests
+    # path('users/<int:pk>/delete/', deleteUser, name='user-delete'), # Handles DELETE requests
+]
+
