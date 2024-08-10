@@ -1,0 +1,50 @@
+from django.test import TestCase
+from django.urls import reverse
+from rest_framework import status
+from rest_framework.test import APITestCase
+from .models import User
+
+class UserTests(APITestCase):
+
+    def setUp(self):
+        self.user1 = User.objects.create(name="John Doe", age=30, city="New York")
+        self.user2 = User.objects.create(name="Jane Doe", age=25, city="Los Angeles")
+        self.user3 = User.objects.create(name="Jim Beam", age=40, city="Chicago")
+        self.valid_payload = {
+            'name': 'Alice',
+            'age': 28,
+            'city': 'San Francisco'
+        }
+        self.invalid_payload = {
+            'name': 'John Doe',  # Name already exists
+            'age': 28,
+            'city': 'San Francisco'
+        }
+
+    def test_get_user_detail(self):
+        url = reverse('get_user_detail', kwargs={'pk': self.user1.pk})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['name'], self.user1.name)
+
+    def test_get_user_detail_not_found(self):
+        url = reverse('get_user_detail', kwargs={'pk': 999})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_get_user_list(self):
+        url = reverse('get_user')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data['results']), 3)  # Assuming pagination is in place
+
+    def test_get_user_list_filter_by_city(self):
+        url = reverse('get_user')
+        response = self.client.get(url, {'city': 'New York'})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data['results']), 1)
+        self.assertEqual(response.data['results'][0]['city'], 'New York')
+
+
+
+
